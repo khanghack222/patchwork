@@ -10,17 +10,17 @@ Type "# AI-powered dependency changelog scanner"
 Enter
 Sleep 500ms
 
-Type "patchwork scan --no-ai"
+Type "bun run scan -- --no-ai"
 Enter
 Sleep 8s
 
 Type ""
 Sleep 2s
 
-Type "# Now with AI analysis + web dashboard"
+Type "# Open web dashboard"
 Enter
 Sleep 500ms
 
-Type "patchwork scan --dashboard --no-ai"
+Type "bun run scan -- --dashboard --no-ai"
 Enter
 Sleep 6s
