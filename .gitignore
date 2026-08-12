@@ -4,3 +4,4 @@ dist/
 .patchwork-result.json
 *.log
 dashboard-screenshot.png
+patchwork.config.ts

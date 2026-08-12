@@ -43,7 +43,7 @@ export async function analyzeChangelog(
     return heuristicAnalysis(changelogText)
   }
 
-  const body = {
+  const body: any = {
     model,
     messages: [
       { role: 'system', content: SYSTEM_PROMPT },
@@ -54,7 +54,11 @@ export async function analyzeChangelog(
     ],
     max_tokens: 500,
     temperature: 0.1,
-    response_format: { type: 'json_object' },
+  }
+
+  // Only add response_format for providers that support it (not Claude/thinking models)
+  if (!model.includes('claude') && !model.includes('thinking')) {
+    body.response_format = { type: 'json_object' }
   }
 
   try {
@@ -71,9 +75,15 @@ export async function analyzeChangelog(
 
     const data = (await res.json()) as any
     const content = data.choices?.[0]?.message?.content || '{}'
-    const parsed = JSON.parse(content) as AIResponse
+    // Extract JSON from response (may be wrapped in markdown code blocks)
+    const jsonStr = content.replace(/```json\s*/g, '').replace(/```\s*/g, '').trim()
+    const parsed = JSON.parse(jsonStr) as AIResponse
+    // Normalize breakingChanges (may be string[] or {description}[])
+    const breakingChanges = (parsed.breakingChanges || []).map((bc: any) =>
+      typeof bc === 'string' ? { description: bc } : bc
+    )
     return {
-      breakingChanges: parsed.breakingChanges || [],
+      breakingChanges,
       summary: parsed.summary || '',
     }
   } catch {
