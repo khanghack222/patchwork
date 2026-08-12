@@ -1,0 +1,6 @@
+node_modules/
+dist/
+.patchwork/
+.patchwork-result.json
+*.log
+dashboard-screenshot.png

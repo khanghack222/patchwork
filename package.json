@@ -1,0 +1,43 @@
+{
+  "name": "patchwork-cli",
+  "version": "0.1.0",
+  "description": "AI-powered dependency changelog scanner. Detect breaking changes before they break you.",
+  "type": "module",
+  "bin": {
+    "patchwork": "./packages/cli/index.ts"
+  },
+  "scripts": {
+    "dev": "bun run packages/cli/index.ts",
+    "build": "bun build packages/cli/index.ts --outdir dist --target bun",
+    "scan": "bun run packages/cli/index.ts scan",
+    "serve": "bun run packages/cli/index.ts serve"
+  },
+  "keywords": [
+    "dependency",
+    "changelog",
+    "breaking-changes",
+    "upgrade",
+    "ai",
+    "llm",
+    "npm",
+    "pip",
+    "cargo",
+    "devtools",
+    "cli"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "cli-table3": "^0.6.5",
+    "commander": "^13.1.0",
+    "hono": "^4.7.0",
+    "open": "^10.1.0",
+    "ora": "^8.1.0",
+    "semver": "^7.6.3"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.2.0",
+    "@types/semver": "^7.5.8"
+  }
+}
