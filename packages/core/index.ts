@@ -75,7 +75,7 @@ export async function scan(
 
   // 5. Classify + analyze each
   const results: AnalysisResult[] = []
-  const ghToken = config?.githubToken || process.env.GITHUB_TOKEN
+  const ghToken = config?.githubToken || process.env.GITHUB_TOKEN || process.env.GH_TOKEN
 
   for (const dep of outdated) {
     dep.semverClass = classifySemver(dep.current, dep.latest)
