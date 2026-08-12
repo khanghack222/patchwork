@@ -4,14 +4,32 @@
   "description": "AI-powered dependency changelog scanner. Detect breaking changes before they break you.",
   "type": "module",
   "bin": {
-    "patchwork": "./packages/cli/index.ts"
+    "patchwork": "./dist/index.js"
   },
+  "main": "./packages/core/index.ts",
+  "exports": {
+    ".": "./packages/core/index.ts",
+    "./types": "./packages/core/types.ts"
+  },
+  "files": [
+    "dist",
+    "packages",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "dev": "bun run packages/cli/index.ts",
-    "build": "bun build packages/cli/index.ts --outdir dist --target bun",
+    "build": "bun build packages/cli/index.ts --outdir dist --target bun --minify",
     "scan": "bun run packages/cli/index.ts scan",
-    "serve": "bun run packages/cli/index.ts serve"
+    "serve": "bun run packages/cli/index.ts serve",
+    "prepublishOnly": "bun run build"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/khanghack222/patchwork.git"
+  },
+  "homepage": "https://github.com/khanghack222/patchwork",
+  "bugs": "https://github.com/khanghack222/patchwork/issues",
   "keywords": [
     "dependency",
     "changelog",
@@ -22,11 +40,18 @@
     "npm",
     "pip",
     "cargo",
+    "golang",
     "devtools",
-    "cli"
+    "cli",
+    "semver",
+    "risk-score",
+    "dashboard"
   ],
-  "author": "",
+  "author": "khanghack222",
   "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
   "dependencies": {
     "chalk": "^5.3.0",
     "cli-table3": "^0.6.5",
